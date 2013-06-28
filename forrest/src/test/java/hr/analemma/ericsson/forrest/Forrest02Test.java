@@ -42,4 +42,52 @@ public class Forrest02Test {
 
 		System.out.println("10x10: " + f.getSuma());
 	}
+	
+	@Test
+	public void test11x11() {
+		Forrest02 f = new Forrest02(11);
+		f.process();
+
+		System.out.println("11x11: " + f.getSuma());
+	}
+	
+	@Test
+	public void test12x12() {
+		Forrest02 f = new Forrest02(12);
+		f.process();
+
+		System.out.println("12x12: " + f.getSuma());
+	}
+	
+	@Test
+	public void test14x14() {
+		Forrest02 f = new Forrest02(14);
+		f.process();
+
+		System.out.println("14x14: " + f.getSuma());
+	}
+	
+	@Test
+	public void test15x15() {
+		Forrest02 f = new Forrest02(15);
+		f.process();
+
+		System.out.println("15x15: " + f.getSuma());
+	}
+	
+	@Test
+	public void test50x50() {
+		Forrest02 f = new Forrest02(50);
+		f.process();
+
+		System.out.println("50x50: " + f.getSuma());
+	}
+	
+	@Test
+	public void test20x20() {
+		Forrest02 f = new Forrest02(20);
+		f.process();
+
+		System.out.println("20x20: " + f.getSuma());
+	}
 }

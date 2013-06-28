@@ -8,7 +8,7 @@ public class Forrest02 {
 
 	private int N;
 
-	private BigDecimal suma = new BigDecimal(0);
+	private BigDecimal sumaUkupno = new BigDecimal(0);
 
 	private List<Integer> primBrojevi;
 
@@ -44,24 +44,26 @@ public class Forrest02 {
 	}
 
 	public String getSuma() {
-		return suma.toString();
+		return sumaUkupno.toString();
 	}
 
 	public void process() {
+	
+		
 		for (int i = 2; i <= N; i++) {
 
 			switch (checkNumber(i)) {
 			case 1:
 				// Broj je prim broj
-				suma= suma.add(getSumAll(i));
+				sumaUkupno= sumaUkupno.add(getSumAll(i));
 				break;
 			case 2:
 				// broj ima parni broj prim djelitelja
-				suma = suma.subtract(getSumAll(i));
+				sumaUkupno = sumaUkupno.subtract(getSumAll(i));
 				break;
 			case 3:
 				// broj ima neparni broj prim djelitelja
-				suma = suma.add(getSumAll(i));
+				sumaUkupno = sumaUkupno.add(getSumAll(i));
 				break;
 
 			default:
@@ -72,11 +74,19 @@ public class Forrest02 {
 		
 		// zbrojimo s s osi 1;
 		BigDecimal sum1 = new BigDecimal(sumNizReal(N));
-		suma = suma.add(sum1);
+		BigDecimal sveUkupno = sum1.multiply(new BigDecimal(N));
 		
-		suma = suma.multiply(new BigDecimal(2));
+		sumaUkupno = sveUkupno.subtract(sumaUkupno);
+		
+		sumaUkupno = sumaUkupno.multiply(new BigDecimal(2));
 	}
 
+	/**
+	 * Suma svih redova
+	 * 
+	 * @param i
+	 * @return
+	 */
 	private BigDecimal getSumAll(int i) {
 		BigDecimal ret = new BigDecimal(i);
 		ret = ret.multiply(new BigDecimal(getX(i)));
@@ -113,6 +123,12 @@ public class Forrest02 {
 		return 3;
 	}
 
+	/**
+	 * Do kuda ide niz i koliko puta se multiplicira niz
+	 * 
+	 * @param i
+	 * @return
+	 */
 	private int getX(int i) {
 		int N0 = N - (N % i);
 		int x = N0 / i;
