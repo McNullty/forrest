@@ -48,22 +48,28 @@ public class Forrest02 {
 	}
 
 	public void process() {
-	
-		
+
+		BigDecimal sumaReda;
 		for (int i = 2; i <= N; i++) {
 
 			switch (checkNumber(i)) {
 			case 1:
 				// Broj je prim broj
-				sumaUkupno= sumaUkupno.add(getSumAll(i));
+				sumaReda = getSumAll(i);
+//				System.out.println(i + ": " + sumaReda.toString());
+				sumaUkupno = sumaUkupno.add(sumaReda);
 				break;
 			case 2:
 				// broj ima parni broj prim djelitelja
-				sumaUkupno = sumaUkupno.subtract(getSumAll(i));
+				sumaReda = getSumAll(i);
+//				System.out.println(i + ": " + sumaReda.toString());
+				sumaUkupno = sumaUkupno.subtract(sumaReda);
 				break;
 			case 3:
 				// broj ima neparni broj prim djelitelja
-				sumaUkupno = sumaUkupno.add(getSumAll(i));
+				sumaReda = getSumAll(i);
+//				System.out.println(i + ": " + sumaReda.toString());
+				sumaUkupno = sumaUkupno.add(sumaReda);
 				break;
 
 			default:
@@ -71,13 +77,13 @@ public class Forrest02 {
 				break;
 			}
 		}
-		
+
 		// zbrojimo s s osi 1;
 		BigDecimal sum1 = new BigDecimal(sumNizReal(N));
 		BigDecimal sveUkupno = sum1.multiply(new BigDecimal(N));
-		
+
 		sumaUkupno = sveUkupno.subtract(sumaUkupno);
-		
+
 		sumaUkupno = sumaUkupno.multiply(new BigDecimal(2));
 	}
 
@@ -91,7 +97,7 @@ public class Forrest02 {
 		BigDecimal ret = new BigDecimal(i);
 		ret = ret.multiply(new BigDecimal(getX(i)));
 		ret = ret.multiply(new BigDecimal(sumNiz(i)));
-		
+
 		return ret;
 	}
 
@@ -104,23 +110,37 @@ public class Forrest02 {
 	 */
 	private int checkNumber(int i) {
 		int sum = 0;
+		List<Integer> djelitelji = new ArrayList<Integer>();
+
 		for (Integer prim : primBrojevi) {
 			if (i == prim) {
 				return 1;
 			} else {
 				if (i % prim == 0) {
 					sum++;
+					djelitelji.add(prim);
 				}
 			}
 		}
 
 		if (sum == 1) {
 			return 4;
-		} else if (sum % 2 == 0) {
+		} else if (sum % 2 == 0 && checkOsnovni(i, djelitelji)) {
 			return 2;
+		} else if(sum % 2 == 1 && checkOsnovni(i, djelitelji)){
+			return 3;
 		}
 
-		return 3;
+		return 5;
+	}
+
+	private boolean checkOsnovni(int i, List<Integer> djelitelji) {
+		int umnozak = 1;
+		for (Integer integer : djelitelji) {
+			umnozak *= integer;
+		}
+		
+		return (i==umnozak);
 	}
 
 	/**
@@ -132,6 +152,7 @@ public class Forrest02 {
 	private int getX(int i) {
 		int N0 = N - (N % i);
 		int x = N0 / i;
+		// int x = N / i;
 
 		return x;
 	}
@@ -141,7 +162,7 @@ public class Forrest02 {
 
 		return ret / 2;
 	}
-	
+
 	private int sumNiz(int i) {
 		int x = getX(i);
 

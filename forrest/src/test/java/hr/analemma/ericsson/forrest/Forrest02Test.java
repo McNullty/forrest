@@ -30,9 +30,23 @@ public class Forrest02Test {
 	@Test
 	public void test100x100() {
 		Forrest02 f = new Forrest02(100);
+		long start = System.currentTimeMillis();
 		f.process();
-
+		long end = System.currentTimeMillis();
+		
 		System.out.println("100x100: " + f.getSuma());
+		System.out.println("elapsed: " + (end - start) + " ms");
+	}
+	
+	@Test
+	public void test1000x1000() {
+		Forrest02 f = new Forrest02(1000);
+		long start = System.currentTimeMillis();
+		f.process();
+		long end = System.currentTimeMillis();
+		
+		System.out.println("1000x1000: " + f.getSuma());
+		System.out.println("elapsed: " + (end - start) + " ms");
 	}
 
 	@Test
