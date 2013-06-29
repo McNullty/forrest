@@ -15,11 +15,11 @@ public class Forrest022Test {
 
 		System.out.println("Mapa:");
 		int[] map = f.getMap();
-		for (int i = 0; i < map.length; i++) {
+		for (int i = 1; i < map.length; i++) {
 			System.out.print(i+1 + "\t");
 		}
 		System.out.println();
-		for (int i = 0; i < map.length; i++) {
+		for (int i = 1; i < map.length; i++) {
 			System.out.print(map[i] + "\t");
 		}
 		

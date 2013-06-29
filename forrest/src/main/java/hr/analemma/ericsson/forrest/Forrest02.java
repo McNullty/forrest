@@ -49,6 +49,12 @@ public class Forrest02 {
 
 	public void process() {
 
+		System.out.println("Mapa:");
+		for (int i = 2; i <= N; i++) {
+			System.out.print(i + "\t");
+		}
+		System.out.println();
+		
 		BigDecimal sumaReda;
 		for (int i = 2; i <= N; i++) {
 
@@ -57,26 +63,26 @@ public class Forrest02 {
 				// Broj je prim broj
 				sumaReda = getSumAll(i);
 //				System.out.println(i + ": " + sumaReda.toString());
-				System.out.println("Oduzimaju se od ukupnog: " + i);
+				System.out.print(1 + "\t" );
 				sumaUkupno = sumaUkupno.add(sumaReda);
 				break;
 			case 2:
 				// broj ima parni broj prim djelitelja
 				sumaReda = getSumAll(i);
 //				System.out.println(i + ": " + sumaReda.toString());
-				System.out.println("Dodaju se na ukupno: " + i);
+				System.out.print(-1 + "\t" );
 				sumaUkupno = sumaUkupno.subtract(sumaReda);
 				break;
 			case 3:
 				// broj ima neparni broj prim djelitelja
 				sumaReda = getSumAll(i);
 //				System.out.println(i + ": " + sumaReda.toString());
-				System.out.println("Oduzimaju se od ukupnog: " + i);
+				System.out.print(3 + "\t" );
 				sumaUkupno = sumaUkupno.add(sumaReda);
 				break;
 
 			default:
-				System.out.println("Ne Radi ništa: " + i);
+				System.out.print(0 + "\t" );
 				// proj ima samo jedan prim djelitelj
 				break;
 			}

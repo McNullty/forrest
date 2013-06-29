@@ -39,13 +39,15 @@ public class Forrest022 {
 			while (j <= N) {
 				int j1 = j - 1;
 
-				if (x == i) {
+				if (i == 2 || i == x) {
+					ret[j1] = 0;
 					osnovni.add(j);
 				} else if (primBrojevi.contains(x)) {
 					ret[j1] = -1;
 					osnovni.add(j);
 				} else if (!osnovni.contains(x)) {
-					ret[j1] = -2;
+					ret[j1] = 4;
+					osnovni.add(j);
 				} else {
 					ret[j1] = 0;
 				}
