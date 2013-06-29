@@ -4,18 +4,63 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Forrest02 {
+/**
+ * Optimizirano tako da se stvaranju liste prim brojeva napravi lista da li se
+ * za taj redak treba zbrajati, oduzimati ili ništa
+ * 
+ * @author mladen
+ * 
+ */
+public class Forrest022 {
 
 	private int N;
 
 	private BigDecimal sumaUkupno = new BigDecimal(0);
 
+	private int[] mapa;
 	private List<Integer> primBrojevi;
 
-	public Forrest02(int n) {
+	public Forrest022(int n) {
 		this.N = n;
-
 		primBrojevi = getAllPrimes();
+
+		mapa = calculateMap();
+	}
+
+	private int[] calculateMap() {
+		int[] ret = new int[N];
+		ArrayList<Integer> osnovni = new ArrayList<Integer>();
+
+		for (Integer i : primBrojevi) {
+			ret[i - 1] = 1;
+
+			int x = 2;
+			int j = (i * x);
+			while (j <= N) {
+				int j1 = j - 1;
+
+				if (x == i) {
+					osnovni.add(j);
+				} else if (primBrojevi.contains(x)) {
+					ret[j1] = -1;
+					osnovni.add(j);
+				} else if (!osnovni.contains(x)) {
+					ret[j1] = -2;
+				} else {
+					ret[j1] = 0;
+				}
+
+				x++;
+				j = (i * x);
+			}
+
+		}
+
+		return ret;
+	}
+
+	public int[] getMap() {
+		return mapa;
 	}
 
 	protected List<Integer> getAllPrimes() {
@@ -30,10 +75,12 @@ public class Forrest02 {
 			if (sito[i]) {
 				int i1 = i + 1;
 				list.add(i1);
+
 				int x = 2;
 				int j = (i1 * x);
 				while (j <= N) {
 					sito[j - 1] = false;
+
 					x++;
 					j = (i1 * x);
 				}
@@ -56,27 +103,23 @@ public class Forrest02 {
 			case 1:
 				// Broj je prim broj
 				sumaReda = getSumAll(i);
-//				System.out.println(i + ": " + sumaReda.toString());
-				System.out.println("Oduzimaju se od ukupnog: " + i);
+				// System.out.println(i + ": " + sumaReda.toString());
 				sumaUkupno = sumaUkupno.add(sumaReda);
 				break;
 			case 2:
 				// broj ima parni broj prim djelitelja
 				sumaReda = getSumAll(i);
-//				System.out.println(i + ": " + sumaReda.toString());
-				System.out.println("Dodaju se na ukupno: " + i);
+				// System.out.println(i + ": " + sumaReda.toString());
 				sumaUkupno = sumaUkupno.subtract(sumaReda);
 				break;
 			case 3:
 				// broj ima neparni broj prim djelitelja
 				sumaReda = getSumAll(i);
-//				System.out.println(i + ": " + sumaReda.toString());
-				System.out.println("Oduzimaju se od ukupnog: " + i);
+				// System.out.println(i + ": " + sumaReda.toString());
 				sumaUkupno = sumaUkupno.add(sumaReda);
 				break;
 
 			default:
-				System.out.println("Ne Radi ništa: " + i);
 				// proj ima samo jedan prim djelitelj
 				break;
 			}
@@ -131,7 +174,7 @@ public class Forrest02 {
 			return 4;
 		} else if (sum % 2 == 0 && checkOsnovni(i, djelitelji)) {
 			return 2;
-		} else if(sum % 2 == 1 && checkOsnovni(i, djelitelji)){
+		} else if (sum % 2 == 1 && checkOsnovni(i, djelitelji)) {
 			return 3;
 		}
 
@@ -143,8 +186,8 @@ public class Forrest02 {
 		for (Integer integer : djelitelji) {
 			umnozak *= integer;
 		}
-		
-		return (i==umnozak);
+
+		return (i == umnozak);
 	}
 
 	/**

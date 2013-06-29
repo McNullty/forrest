@@ -7,22 +7,37 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class Forrest02Test {
+public class Forrest022Test {
 
 	@Test
 	public void testPrimes() {
-		Forrest02 f = new Forrest02(50);
+		Forrest022 f = new Forrest022(100);
 
+		System.out.println("Mapa:");
+		int[] map = f.getMap();
+		for (int i = 0; i < map.length; i++) {
+			System.out.print(i+1 + "\t");
+		}
+		System.out.println();
+		for (int i = 0; i < map.length; i++) {
+			System.out.print(map[i] + "\t");
+		}
+		
 		List<Integer> list = f.getAllPrimes();
 
+		System.out.println();
+		System.out.println("Prim brojevi:");
 		for (Integer integer : list) {
 			System.out.print(integer.toString() + " ");
 		}
+		
+		
+		
 	}
 
 	@Test
 	public void test4x4() {
-		Forrest02 f = new Forrest02(4);
+		Forrest022 f = new Forrest022(4);
 		f.process();
 
 		System.out.println("4x4: " + f.getSuma());
@@ -30,7 +45,7 @@ public class Forrest02Test {
 
 	@Test
 	public void test100x100() {
-		Forrest02 f = new Forrest02(100);
+		Forrest022 f = new Forrest022(100);
 		long start = System.currentTimeMillis();
 		f.process();
 		long end = System.currentTimeMillis();
@@ -41,7 +56,7 @@ public class Forrest02Test {
 	
 	@Test
 	public void test1000x1000() {
-		Forrest02 f = new Forrest02(1000);
+		Forrest022 f = new Forrest022(1000);
 		long start = System.currentTimeMillis();
 		f.process();
 		long end = System.currentTimeMillis();
@@ -52,8 +67,20 @@ public class Forrest02Test {
 	
 	@Ignore
 	@Test
+	public void test10000x10000() {
+		Forrest022 f = new Forrest022(500000);
+		long start = System.currentTimeMillis();
+		f.process();
+		long end = System.currentTimeMillis();
+		
+		System.out.println("10000x10000: " + f.getSuma());
+		System.out.println("elapsed: " + (end - start) + " ms");
+	}
+	
+	@Ignore
+	@Test
 	public void testFinal() {
-		Forrest02 f = new Forrest02(100000000);
+		Forrest022 f = new Forrest022(100000000);
 		long start = System.currentTimeMillis();
 		f.process();
 		long end = System.currentTimeMillis();
@@ -64,7 +91,7 @@ public class Forrest02Test {
 
 	@Test
 	public void test10x10() {
-		Forrest02 f = new Forrest02(10);
+		Forrest022 f = new Forrest022(10);
 		f.process();
 
 		System.out.println("10x10: " + f.getSuma());
@@ -72,7 +99,7 @@ public class Forrest02Test {
 	
 	@Test
 	public void test11x11() {
-		Forrest02 f = new Forrest02(11);
+		Forrest022 f = new Forrest022(11);
 		f.process();
 
 		System.out.println("11x11: " + f.getSuma());
@@ -80,7 +107,7 @@ public class Forrest02Test {
 	
 	@Test
 	public void test12x12() {
-		Forrest02 f = new Forrest02(12);
+		Forrest022 f = new Forrest022(12);
 		f.process();
 
 		System.out.println("12x12: " + f.getSuma());
@@ -88,7 +115,7 @@ public class Forrest02Test {
 	
 	@Test
 	public void test14x14() {
-		Forrest02 f = new Forrest02(14);
+		Forrest022 f = new Forrest022(14);
 		f.process();
 
 		System.out.println("14x14: " + f.getSuma());
@@ -96,7 +123,7 @@ public class Forrest02Test {
 	
 	@Test
 	public void test15x15() {
-		Forrest02 f = new Forrest02(15);
+		Forrest022 f = new Forrest022(15);
 		f.process();
 
 		System.out.println("15x15: " + f.getSuma());
@@ -104,7 +131,7 @@ public class Forrest02Test {
 	
 	@Test
 	public void test50x50() {
-		Forrest02 f = new Forrest02(50);
+		Forrest022 f = new Forrest022(50);
 		f.process();
 
 		System.out.println("50x50: " + f.getSuma());
@@ -112,7 +139,7 @@ public class Forrest02Test {
 	
 	@Test
 	public void test20x20() {
-		Forrest02 f = new Forrest02(20);
+		Forrest022 f = new Forrest022(20);
 		f.process();
 
 		System.out.println("20x20: " + f.getSuma());
