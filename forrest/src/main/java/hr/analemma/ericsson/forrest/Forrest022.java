@@ -24,41 +24,6 @@ public class Forrest022 {
 		this.N = n;
 		primBrojevi = getAllPrimes();
 
-		mapa = calculateMap();
-	}
-
-	private int[] calculateMap() {
-		int[] ret = new int[N];
-		ArrayList<Integer> osnovni = new ArrayList<Integer>();
-
-		for (Integer i : primBrojevi) {
-			ret[i - 1] = 1;
-
-			int x = 2;
-			int j = (i * x);
-			while (j <= N) {
-				int j1 = j - 1;
-
-				if (i == 2 || i == x) {
-					ret[j1] = 0;
-					osnovni.add(j);
-				} else if (primBrojevi.contains(x)) {
-					ret[j1] = -1;
-					osnovni.add(j);
-				} else if (!osnovni.contains(x)) {
-					ret[j1] = 4;
-					osnovni.add(j);
-				} else {
-					ret[j1] = 0;
-				}
-
-				x++;
-				j = (i * x);
-			}
-
-		}
-
-		return ret;
 	}
 
 	public int[] getMap() {
@@ -67,8 +32,11 @@ public class Forrest022 {
 
 	protected List<Integer> getAllPrimes() {
 		boolean[] sito = new boolean[N];
+		mapa = new int[N];
+
 		for (int i = 1; i < sito.length; i++) {
 			sito[i] = true;
+			mapa[i] = 1;
 		}
 
 		ArrayList<Integer> list = new ArrayList<Integer>();
@@ -77,14 +45,30 @@ public class Forrest022 {
 			if (sito[i]) {
 				int i1 = i + 1;
 				list.add(i1);
+				// mapa se ne dira jer je već označena s 1
 
 				int x = 2;
 				int j = (i1 * x);
 				while (j <= N) {
 					sito[j - 1] = false;
+					mapa[j - 1]--;// oduzmemo sve višekratnike
 
 					x++;
 					j = (i1 * x);
+				}
+			} else if (mapa[i] == -2) {
+				mapa[i] = -1; // postavimo oznaku da se treba ukoniti
+
+				// dodamo sve višekratnike
+				for (int j = i; j < sito.length; j += i) {
+					mapa[j]++;
+				}
+			} else if (mapa[i] == 2) {
+				mapa[i] = 3; // postavimo oznaku da se treba dodati
+
+				// oduzmemo sve višekratnike
+				for (int j = i; j < sito.length; j += i) {
+					mapa[j]--;
 				}
 			}
 		}
