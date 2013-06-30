@@ -1,5 +1,6 @@
 package hr.analemma.ericsson.forrest;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class Forrest01Test {
@@ -23,6 +24,7 @@ public class Forrest01Test {
 		System.out.println("elapsed: " + (end - start) + " ms");
 	}
 	
+	@Ignore
 	@Test
 	public void test1000x1000() {
 		Forrest01 f  =new Forrest01(1000, 1000);

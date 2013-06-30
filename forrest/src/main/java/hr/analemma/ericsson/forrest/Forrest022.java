@@ -23,11 +23,22 @@ public class Forrest022 {
 	public Forrest022(int n) {
 		this.N = n;
 		primBrojevi = getAllPrimes();
-
 	}
 
 	public int[] getMap() {
 		return mapa;
+	}
+
+	private void printMap2(int n, int[] m) {
+		System.out.println((n + 1) + ". Mapa:");
+		for (int i = 1; i < m.length; i++) {
+			System.out.print(i + 1 + "\t");
+		}
+		System.out.println();
+		for (int i = 1; i < m.length; i++) {
+			System.out.print(m[i] + "\t");
+		}
+		System.out.println();
 	}
 
 	protected List<Integer> getAllPrimes() {
@@ -56,21 +67,25 @@ public class Forrest022 {
 					x++;
 					j = (i1 * x);
 				}
-			} else if (mapa[i] == -2) {
-				mapa[i] = -1; // postavimo oznaku da se treba ukoniti
+			} else if (mapa[i] == -1) {
+				mapa[i] = 2; // postavimo oznaku da se treba ukoniti
 
+				int i1 = i + 1;
 				// dodamo sve višekratnike
-				for (int j = i; j < sito.length; j += i) {
-					mapa[j]++;
+				for (int j = i1 * 2; j < sito.length; j += i1) {
+					mapa[j - 1] += 1;
 				}
-			} else if (mapa[i] == 2) {
+			} else if (mapa[i] == 1) {
 				mapa[i] = 3; // postavimo oznaku da se treba dodati
 
+				int i1 = i + 1;
 				// oduzmemo sve višekratnike
-				for (int j = i; j < sito.length; j += i) {
-					mapa[j]--;
+				for (int j = i1 * 2; j < sito.length; j += i1) {
+					mapa[j - 1] -= 1;
 				}
 			}
+
+//			printMap2(i, mapa);
 		}
 
 		return list;
@@ -142,29 +157,7 @@ public class Forrest022 {
 	 * @return
 	 */
 	private int checkNumber(int i) {
-		int sum = 0;
-		List<Integer> djelitelji = new ArrayList<Integer>();
-
-		for (Integer prim : primBrojevi) {
-			if (i == prim) {
-				return 1;
-			} else {
-				if (i % prim == 0) {
-					sum++;
-					djelitelji.add(prim);
-				}
-			}
-		}
-
-		if (sum == 1) {
-			return 4;
-		} else if (sum % 2 == 0 && checkOsnovni(i, djelitelji)) {
-			return 2;
-		} else if (sum % 2 == 1 && checkOsnovni(i, djelitelji)) {
-			return 3;
-		}
-
-		return 5;
+		return mapa[i-1];
 	}
 
 	private boolean checkOsnovni(int i, List<Integer> djelitelji) {
