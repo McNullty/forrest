@@ -62,21 +62,18 @@ public class Forrest02 {
 			case 1:
 				// Broj je prim broj
 				sumaReda = getSumAll(i);
-//				System.out.println(i + ": " + sumaReda.toString());
 //				System.out.print(1 + "\t" );
 				sumaUkupno = sumaUkupno.add(sumaReda);
 				break;
 			case 2:
 				// broj ima parni broj prim djelitelja
 				sumaReda = getSumAll(i);
-//				System.out.println(i + ": " + sumaReda.toString());
 //				System.out.print(-1 + "\t" );
 				sumaUkupno = sumaUkupno.subtract(sumaReda);
 				break;
 			case 3:
 				// broj ima neparni broj prim djelitelja
 				sumaReda = getSumAll(i);
-//				System.out.println(i + ": " + sumaReda.toString());
 //				System.out.print(3 + "\t" );
 				sumaUkupno = sumaUkupno.add(sumaReda);
 				break;

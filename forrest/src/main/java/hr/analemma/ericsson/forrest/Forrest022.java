@@ -72,7 +72,7 @@ public class Forrest022 {
 
 				int i1 = i + 1;
 				// dodamo sve višekratnike
-				for (int j = i1 * 2; j < sito.length; j += i1) {
+				for (int j = i1 * 2; j <= sito.length; j += i1) {
 					mapa[j - 1] += 1;
 				}
 			} else if (mapa[i] == 1) {
@@ -80,7 +80,7 @@ public class Forrest022 {
 
 				int i1 = i + 1;
 				// oduzmemo sve višekratnike
-				for (int j = i1 * 2; j < sito.length; j += i1) {
+				for (int j = i1 * 2; j <= sito.length; j += i1) {
 					mapa[j - 1] -= 1;
 				}
 			}
@@ -104,19 +104,19 @@ public class Forrest022 {
 			case 1:
 				// Broj je prim broj
 				sumaReda = getSumAll(i);
-				// System.out.println(i + ": " + sumaReda.toString());
+//				 System.out.println(i + ": " + sumaReda.toString());
 				sumaUkupno = sumaUkupno.add(sumaReda);
 				break;
 			case 2:
 				// broj ima parni broj prim djelitelja
 				sumaReda = getSumAll(i);
-				// System.out.println(i + ": " + sumaReda.toString());
+//				 System.out.println(i + ": " + sumaReda.toString());
 				sumaUkupno = sumaUkupno.subtract(sumaReda);
 				break;
 			case 3:
 				// broj ima neparni broj prim djelitelja
 				sumaReda = getSumAll(i);
-				// System.out.println(i + ": " + sumaReda.toString());
+//				 System.out.println(i + ": " + sumaReda.toString());
 				sumaUkupno = sumaUkupno.add(sumaReda);
 				break;
 
