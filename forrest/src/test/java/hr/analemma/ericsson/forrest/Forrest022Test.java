@@ -2,6 +2,8 @@ package hr.analemma.ericsson.forrest;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 import org.junit.Ignore;
@@ -65,19 +67,19 @@ public class Forrest022Test {
 		System.out.println("elapsed: " + (end - start) + " ms");
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test
-	public void test10000x10000() {
+	public void test500000x500000() {
 		Forrest022 f = new Forrest022(500000);
 		long start = System.currentTimeMillis();
 		f.process();
 		long end = System.currentTimeMillis();
 		
-		System.out.println("10000x10000: " + f.getSuma());
+		System.out.println("500000x500000: " + f.getSuma());
 		System.out.println("elapsed: " + (end - start) + " ms");
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test
 	public void testFinal() {
 		Forrest022 f = new Forrest022(100000000);
@@ -85,7 +87,7 @@ public class Forrest022Test {
 		f.process();
 		long end = System.currentTimeMillis();
 		
-		System.out.println("1000x1000: " + f.getSuma());
+		System.out.println("100000000x100000000: " + f.getSuma());
 		System.out.println("elapsed: " + (end - start) + " ms");
 	}
 
@@ -143,5 +145,14 @@ public class Forrest022Test {
 		f.process();
 
 		System.out.println("20x20: " + f.getSuma());
+	}
+	
+	@Test
+	public void testBigInteger() {
+		BigDecimal bd = new BigDecimal(100000000);
+		
+		System.out.println(bd.toString());
+		bd = bd.pow(3);
+		System.out.println(bd.toString());
 	}
 }

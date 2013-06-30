@@ -1,6 +1,7 @@
 package hr.analemma.ericsson.forrest;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,8 +128,10 @@ public class Forrest022 {
 		}
 
 		// zbrojimo s s osi 1;
-		BigDecimal sum1 = new BigDecimal(sumNizReal(N));
+		BigDecimal sum1 = sumNizReal(N);
+		System.out.println("Suma niza: " + sum1.toString());
 		BigDecimal sveUkupno = sum1.multiply(new BigDecimal(N));
+		System.out.println("Ukupna Suma niza: " + sveUkupno.toString());
 
 		sumaUkupno = sveUkupno.subtract(sumaUkupno);
 
@@ -144,7 +147,7 @@ public class Forrest022 {
 	private BigDecimal getSumAll(int i) {
 		BigDecimal ret = new BigDecimal(i);
 		ret = ret.multiply(new BigDecimal(getX(i)));
-		ret = ret.multiply(new BigDecimal(sumNiz(i)));
+		ret = ret.multiply(sumNiz(i));
 
 		return ret;
 	}
@@ -183,13 +186,14 @@ public class Forrest022 {
 		return x;
 	}
 
-	private int sumNizReal(int x) {
-		int ret = x * (x + 1);
+	private BigDecimal sumNizReal(int x) {
+		BigDecimal ret = new BigDecimal(x); //x * (x + 1);
+		ret = ret.multiply(new BigDecimal(x+1));
 
-		return ret / 2;
+		return ret.divide(new BigDecimal(2));
 	}
 
-	private int sumNiz(int i) {
+	private BigDecimal sumNiz(int i) {
 		int x = getX(i);
 
 		return sumNizReal(x);
