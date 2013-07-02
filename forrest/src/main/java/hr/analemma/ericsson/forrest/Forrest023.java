@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.ListUtils;
@@ -49,10 +51,12 @@ public class Forrest023 {
 	protected List<Integer> getAllPrimes() {
 		boolean[] sito = new boolean[N];
 		mapa = new int[N];
+		int[] mapaPrimIVisekratnici = new int[N];
+		int maxMapa = 0;
 
 		for (int i = 1; i < sito.length; i++) {
 			sito[i] = true;
-			mapa[i] = 1;
+			// mapa[i] = 1;
 		}
 
 		ArrayList<Integer> list = new ArrayList<Integer>();
@@ -61,30 +65,53 @@ public class Forrest023 {
 		for (int i = 0; i < sito.length; i++) {
 			if (sito[i]) {
 				int i1 = i + 1;
-				ArrayList<Integer> listTmp = new ArrayList<Integer>();
-				
-				for (Integer integer : list) {
+
+				int x = 2;
+				int k = (i1 * x);
+				while (k <= N) {
+					sito[k - 1] = false;
+
+					x++;
+					k = (i1 * x);
+				}
+
+				int offset = 0;
+				for (int j = 0; j < maxMapa; j++) {
+					int integer = mapaPrimIVisekratnici[j];
+
 					int osnovni = i1 * integer;
-					if (osnovni <= N) {
+					if (osnovni > N) {
+						break;
+					}
+					if (osnovni <= N && osnovni > 0) {
 						int brojPrimDjelitelja = hm.get(integer);
 						brojPrimDjelitelja++;
 
 						if (brojPrimDjelitelja % 2 == 0) {
-							mapa[osnovni - 1] = -1;
+							mapa[osnovni - 1] = 2;
 						} else {
 							mapa[osnovni - 1] = 3;
 						}
 
-						listTmp.add(osnovni);
+						int tempMaxMapa = maxMapa + offset;
+						if (tempMaxMapa <= N - 1) {
+							mapaPrimIVisekratnici[tempMaxMapa] = osnovni;
+						} else {
+							break;
+						}
+						offset++;
 						hm.put(osnovni, brojPrimDjelitelja);
 					}
 				}
-				list.add(i1);
+				maxMapa += offset;
+				offset = 0;
+				mapaPrimIVisekratnici[maxMapa++] = i1;
 				hm.put(i1, 1);
-				
-				list = (ArrayList<Integer>) ListUtils.union(list, listTmp);				
+				mapa[i] = 1;
+
 			}
 			// printMap2(i, mapa);
+			// printMap2(i, mapaPrimIVisekratnici);
 		}
 
 		return list;
@@ -127,9 +154,9 @@ public class Forrest023 {
 
 		// zbrojimo s s osi 1;
 		BigDecimal sum1 = sumNizReal(N);
-		System.out.println("Suma niza: " + sum1.toString());
+		// System.out.println("Suma niza: " + sum1.toString());
 		BigDecimal sveUkupno = sum1.multiply(new BigDecimal(N));
-		System.out.println("Ukupna Suma niza: " + sveUkupno.toString());
+		// System.out.println("Ukupna Suma niza: " + sveUkupno.toString());
 
 		sumaUkupno = sveUkupno.subtract(sumaUkupno);
 

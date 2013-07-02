@@ -129,9 +129,9 @@ public class Forrest022 {
 
 		// zbrojimo s s osi 1;
 		BigDecimal sum1 = sumNizReal(N);
-		System.out.println("Suma niza: " + sum1.toString());
+//		System.out.println("Suma niza: " + sum1.toString());
 		BigDecimal sveUkupno = sum1.multiply(new BigDecimal(N));
-		System.out.println("Ukupna Suma niza: " + sveUkupno.toString());
+//		System.out.println("Ukupna Suma niza: " + sveUkupno.toString());
 
 		sumaUkupno = sveUkupno.subtract(sumaUkupno);
 
