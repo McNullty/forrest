@@ -75,6 +75,10 @@ public class Forrest023 {
 					k = (i1 * x);
 				}
 
+				mapaPrimIVisekratnici[maxMapa++] = i1;
+				hm.put(i1, 1);
+				mapa[i] = 1;
+				
 				int offset = 0;
 				for (int j = 0; j < maxMapa; j++) {
 					int integer = mapaPrimIVisekratnici[j];
@@ -94,7 +98,7 @@ public class Forrest023 {
 						}
 
 						int tempMaxMapa = maxMapa + offset;
-						if (tempMaxMapa <= N - 1) {
+						if (tempMaxMapa < N) {
 							mapaPrimIVisekratnici[tempMaxMapa] = osnovni;
 						} else {
 							break;
@@ -105,12 +109,9 @@ public class Forrest023 {
 				}
 				maxMapa += offset;
 				offset = 0;
-				mapaPrimIVisekratnici[maxMapa++] = i1;
-				hm.put(i1, 1);
-				mapa[i] = 1;
 
 			}
-			// printMap2(i, mapa);
+			 printMap2(i, mapa);
 			// printMap2(i, mapaPrimIVisekratnici);
 		}
 
